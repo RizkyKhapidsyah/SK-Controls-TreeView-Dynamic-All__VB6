@@ -1,0 +1,28 @@
+Attribute VB_Name = "ModDBCon"
+
+Public cn As ADODB.Connection
+Public MSMDB As String
+Public Custom As Boolean
+Public Function DBConnected() As Boolean
+
+If Custom = False Then MSMDB = App.Path & "\" & "GALLERY.MDB"
+    
+
+On Error GoTo OpenDBError
+    Set cn = New ADODB.Connection
+    cn.Provider = "Microsoft.Jet.OLEDB.4.0"
+    cn.Open MSMDB
+    DBConnected = True
+Exit Function
+
+
+OpenDBError:
+DBConnected = False
+
+MsgBox "Error Opening Database" & vbNewLine & Err.Description, vbCritical + vbOK
+End
+
+
+
+
+End Function
